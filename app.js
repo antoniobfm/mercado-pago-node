@@ -1,11 +1,12 @@
 var express = require('express');
 var exphbs  = require('express-handlebars');
+require('dotenv/config');
 var mercadopago = require('mercadopago')
 var port = process.env.PORT || 3000
 
 mercadopago.configure({
-    access_token: 'ACCESS_TOKEN',
-    integrator_id: 'INTERGRATOR_ID',
+    access_token: process.env.MP_ACCESS_TOKEN,
+    integrator_id: process.env.MP_INTEGRATOR_ID,
   });
 
 var app = express();
@@ -38,17 +39,17 @@ app.post('/create-preference', function (req, res) {
         }
     }
 
+    let items = [{
+        id: 1234,
+        title: req.body.title,
+        description: "Celular de Tienda e-commerce",
+        picture_url: req.body.picture_url,
+        unit_price: Number(req.body.price),
+        quantity: parseInt(req.body.unit, 10),
+    }]
+
     let preference = {
-        items: [
-            {
-            id: 1234,
-            title: req.body.title,
-            description: "Celular de Tienda e-commerce",
-            picture_url: req.body.picture_url,
-            unit_price: Number(req.body.price),
-            quantity: parseInt(req.body.unit, 10),
-            }
-        ],
+        items,
         payer,
         external_reference: "iamantoniomoraes@gmail.com",
         back_urls: {
@@ -65,7 +66,7 @@ app.post('/create-preference', function (req, res) {
             ],
             installments: 6
         },
-        notification_url: "https://webhook.site/20cfc9b3-31a7-4fa5-a844-995ac1c50692",
+        notification_url: "https://monkfish-app-t5kdq.ondigitalocean.app/notifications",
         };
 
     console.log(preference);
