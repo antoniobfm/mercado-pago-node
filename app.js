@@ -53,9 +53,9 @@ app.post('/create-preference', function (req, res) {
         payer,
         external_reference: "iamantoniomoraes@gmail.com",
         back_urls: {
-            success: "http://localhost:3000/success",
-            failure: "http://localhost:3000/failure",
-            pending: "http://localhost:3000/pending"
+            success: "https://monkfish-app-t5kdq.ondigitalocean.app/success",
+            failure: "https://monkfish-app-t5kdq.ondigitalocean.app/failure",
+            pending: "https://monkfish-app-t5kdq.ondigitalocean.app/pending"
         },
         auto_return: "approved",
         payment_methods: {
