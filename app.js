@@ -16,6 +16,7 @@ app.set('view engine', 'handlebars');
 
 app.use(express.static('assets'));
 app.use(express.urlencoded());
+app.use(express.json({ extended: true }));
  
 app.use('/assets', express.static(__dirname + '/assets'));
 
@@ -82,7 +83,8 @@ app.post('/create-preference', function (req, res) {
 });
 
 app.post('/notifications', function (req, res) {
-    console.log(req.body)
+    console.log('Webhook was called');
+    console.log(req.body);
     res.sendStatus(201);
 });
 
